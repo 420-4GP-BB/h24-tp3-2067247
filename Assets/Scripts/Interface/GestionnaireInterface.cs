@@ -20,6 +20,11 @@ public class GestionnaireInterface : MonoBehaviour
 
     private Difficulte difficulte;
     private Personnage personnage;
+    public bool fermier
+    {
+        private set;
+        get;
+    }
 
     [SerializeField] private TMP_InputField nomJoueur;
     [SerializeField] private TMP_Text presentation;
@@ -33,10 +38,12 @@ public class GestionnaireInterface : MonoBehaviour
     [SerializeField] private TMP_Dropdown personnageDropdown;
     [SerializeField] private GameObject personnageFermier;
     [SerializeField] private GameObject personnageFermiere;
+    
 
     // Start is called before the first frame update
     void Start()
     {
+        fermier = true;
         nomJoueur.text = "Mathurin";
         ChangerNomJoueur();
         personnageFermier.SetActive(true);
@@ -76,12 +83,14 @@ public class GestionnaireInterface : MonoBehaviour
         {
             personnageFermier.SetActive(true);
             personnageFermiere.SetActive(false);
+            fermier = true;
 
         }
         else
         {
             personnageFermiere.SetActive(true);
             personnageFermier.SetActive(false);
+            fermier = false;
         }
     }
 
@@ -107,6 +116,7 @@ public class GestionnaireInterface : MonoBehaviour
         ParametresParties.Instance.SemencesDepart = valeursActuelles[2];
         ParametresParties.Instance.TempsCroissance = valeursActuelles[3];
         ParametresParties.Instance.DelaiCueillete = valeursActuelles[4];
+        ParametresParties.Instance.fermier = fermier;
 
         if (nomJoueur.text != string.Empty)
         {

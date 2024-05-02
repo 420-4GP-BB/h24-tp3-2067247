@@ -6,16 +6,17 @@ public class ParametresParties
     public int OrDepart { get; set; } = 200;
     public int OeufsDepart { get; set; } = 5;
     public int SemencesDepart { get; set; } = 5;
+    public bool fermier { get; set; } = true;
 
     ///// <summary>
-    ///// Nombre de jours nécessaires à un chou pour être prêts
-    ///// 0 = le chou est déjà prêt dès qu'on le plante
+    ///// Nombre de jours nï¿½cessaires ï¿½ un chou pour ï¿½tre prï¿½ts
+    ///// 0 = le chou est dï¿½jï¿½ prï¿½t dï¿½s qu'on le plante
     ///// </summary>
     public int TempsCroissance { get; set; } = 3;
 
     ///// <summary>
-    ///// Nombre de jours pendant lesquels on peut cueillir un chou prêt
-    ///// Plus cette valeur est petite, plus on doit se dépêcher avant qu'ils ne soient plus bons
+    ///// Nombre de jours pendant lesquels on peut cueillir un chou prï¿½t
+    ///// Plus cette valeur est petite, plus on doit se dï¿½pï¿½cher avant qu'ils ne soient plus bons
     ///// </summary>
     public int DelaiCueillete { get; set; } = 5;
 

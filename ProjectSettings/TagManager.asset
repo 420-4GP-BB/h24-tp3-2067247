@@ -6,6 +6,9 @@ TagManager:
   tags:
   - PointsPoulet
   - Poule
+  - Homme
+  - Femme
+  - Joueur
   layers:
   - Default
   - TransparentFX

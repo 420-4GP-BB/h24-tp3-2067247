@@ -4,9 +4,9 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private Soleil _soleil;
-
+    [SerializeField] private GameObject fermier;
+    [SerializeField] private GameObject fermiere;
     private ComportementJoueur _joueur;
-
     private const float DISTANCE_ACTION = 3.0f;
 
     private Inventaire _inventaireJoueur;
@@ -16,7 +16,17 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        _joueur = GameObject.Find("Joueur").GetComponent<ComportementJoueur>();
+        if (ParametresParties.Instance.fermier)
+        {
+            fermiere.SetActive(false);
+        }
+        else
+        {
+            fermier.SetActive(false);
+        }
+        
+        _joueur = _joueur = GameObject.FindGameObjectWithTag("Joueur").GetComponent<ComportementJoueur>();
+        Debug.Log(_joueur);
         _inventaireJoueur = _joueur.GetComponent<Inventaire>();
         _energieJoueur = _joueur.GetComponent<EnergieJoueur>();
         _chous = FindObjectsByType<ChouMesh3D>(FindObjectsSortMode.None);

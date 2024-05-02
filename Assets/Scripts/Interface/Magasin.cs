@@ -55,8 +55,7 @@ public class Magasin : MonoBehaviour
         _prixGraines.text = PRIX_GRAINES.ToString();
         _prixChoux.text = PRIX_CHOUX.ToString();
 
-
-        _joueur = GameObject.Find("Joueur");
+        _joueur = GameObject.FindGameObjectWithTag("Joueur");
         _messageBienvenue.text = $"Bonjour {_joueur.GetComponent<DonneesJoueur>().Nom}, " +
                                  "que puis-je faire pour toi aujourd'hui ?";
         _inventaire = _joueur.GetComponent<Inventaire>();

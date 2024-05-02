@@ -20,7 +20,7 @@ public class AffichageRessource : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        UnityEngine.GameObject joueur = UnityEngine.GameObject.Find("Joueur");
+        UnityEngine.GameObject joueur = UnityEngine.GameObject.FindGameObjectWithTag("Joueur");
         ressourcesJoueurs = joueur.GetComponent<Inventaire>();
         energieJoueur = joueur.GetComponent<EnergieJoueur>();
         _nomJoueur.text = joueur.GetComponent<DonneesJoueur>().Nom;
