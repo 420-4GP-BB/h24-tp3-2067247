@@ -17,10 +17,22 @@ public class GestionnaireInterface : MonoBehaviour
         Fermier,
         Fermiere
     }
+    enum Foret
+    {
+        Grille,
+        Random,
+        Simulation
+    }
 
     private Difficulte difficulte;
     private Personnage personnage;
+    private Foret foret;
     public bool fermier
+    {
+        private set;
+        get;
+    }
+    public string typeForet
     {
         private set;
         get;
@@ -36,6 +48,8 @@ public class GestionnaireInterface : MonoBehaviour
     [SerializeField] private TMP_Text[] valeursDepart;
     [SerializeField] private TMP_Dropdown difficulteDropdown;
     [SerializeField] private TMP_Dropdown personnageDropdown;
+    [SerializeField] private TMP_Dropdown foretDropdown;
+
     [SerializeField] private GameObject personnageFermier;
     [SerializeField] private GameObject personnageFermiere;
     
@@ -93,6 +107,26 @@ public class GestionnaireInterface : MonoBehaviour
             fermier = false;
         }
     }
+    public void ChangerForet()
+    {
+        foret = (Foret)foretDropdown.value;
+
+        switch (foret)
+        {
+            case Foret.Grille:
+                typeForet = "Grille";
+               
+                break;
+            case Foret.Random:
+                typeForet = "Random";
+                break;
+            case Foret.Simulation:
+                typeForet = "Simulation";
+                break;
+        }
+    }
+
+
 
     public void DemarrerPartie()
     {
@@ -117,6 +151,8 @@ public class GestionnaireInterface : MonoBehaviour
         ParametresParties.Instance.TempsCroissance = valeursActuelles[3];
         ParametresParties.Instance.DelaiCueillete = valeursActuelles[4];
         ParametresParties.Instance.fermier = fermier;
+        ParametresParties.Instance.typeForet = typeForet;
+
 
         if (nomJoueur.text != string.Empty)
         {

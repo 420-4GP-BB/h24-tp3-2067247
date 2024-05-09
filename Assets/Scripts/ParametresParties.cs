@@ -7,6 +7,7 @@ public class ParametresParties
     public int OeufsDepart { get; set; } = 5;
     public int SemencesDepart { get; set; } = 5;
     public bool fermier { get; set; } = true;
+    public string typeForet { get; set; } = "Grille";
 
     ///// <summary>
     ///// Nombre de jours n�cessaires � un chou pour �tre pr�ts

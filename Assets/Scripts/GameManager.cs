@@ -1,3 +1,4 @@
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,6 +7,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Soleil _soleil;
     [SerializeField] private GameObject fermier;
     [SerializeField] private GameObject fermiere;
+    [SerializeField] private GameObject plane;
     private ComportementJoueur _joueur;
     private const float DISTANCE_ACTION = 3.0f;
 
@@ -16,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        Debug.Log(plane.GetComponent<Renderer>().bounds.size);
         if (ParametresParties.Instance.fermier)
         {
             fermiere.SetActive(false);
