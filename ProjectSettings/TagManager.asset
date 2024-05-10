@@ -9,6 +9,7 @@ TagManager:
   - Homme
   - Femme
   - Joueur
+  - SansArbre
   layers:
   - Default
   - TransparentFX
