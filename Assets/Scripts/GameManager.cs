@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Soleil _soleil;
     [SerializeField] private GameObject fermier;
     [SerializeField] private GameObject fermiere;
-    [SerializeField] private GameObject plane;
     private ComportementJoueur _joueur;
     private const float DISTANCE_ACTION = 3.0f;
 
@@ -16,9 +15,8 @@ public class GameManager : MonoBehaviour
     private ChouMesh3D[] _chous;
     public int NumeroJour = 1;
 
-    void Start()
+    private void Awake()
     {
-        Debug.Log(plane.GetComponent<Renderer>().bounds.size);
         if (ParametresParties.Instance.fermier)
         {
             fermiere.SetActive(false);
@@ -27,9 +25,12 @@ public class GameManager : MonoBehaviour
         {
             fermier.SetActive(false);
         }
+    }
+    void Start()
+    {
         
-        _joueur = _joueur = GameObject.FindGameObjectWithTag("Joueur").GetComponent<ComportementJoueur>();
-        Debug.Log(_joueur);
+        
+        _joueur = GameObject.FindGameObjectWithTag("Joueur").GetComponent<ComportementJoueur>();
         _inventaireJoueur = _joueur.GetComponent<Inventaire>();
         _energieJoueur = _joueur.GetComponent<EnergieJoueur>();
         _chous = FindObjectsByType<ChouMesh3D>(FindObjectsSortMode.None);
@@ -53,6 +54,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SceneManager.LoadScene("MenuConfiguration");

@@ -19,11 +19,13 @@ public class CodesTriche : MonoBehaviour
         _joueur = GameObject.FindGameObjectWithTag("Joueur");
         _inventaire = _joueur.GetComponent<Inventaire>();
         _controller = _joueur.GetComponent<CharacterController>();
+    
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             _controller.enabled = false;
