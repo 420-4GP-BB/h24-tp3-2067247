@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Terrain : MonoBehaviour
 {
-    StrategieArbre strategie = new StrategieGrille();
+    //StrategieArbre strategie = new StrategieGrille();
+    StrategieArbre strategie = new StrategieRandom();
     [SerializeField] private GameObject arbre;
     
     // Start is called before the first frame update
