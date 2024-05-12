@@ -6,13 +6,12 @@ public class Terrain : MonoBehaviour
 {
     StrategieArbre strategie = new StrategieGrille();
     [SerializeField] private GameObject arbre;
-    Vector3[] tabArbre;
     
     // Start is called before the first frame update
     void Start()
     {
-        tabArbre = strategie.ChoisirEmplacement();
-        foreach (Vector3 position in tabArbre)
+         
+        foreach (Vector3 position in strategie.ChoisirEmplacement())
         {
             Instantiate(arbre, position, Quaternion.identity);
         }
