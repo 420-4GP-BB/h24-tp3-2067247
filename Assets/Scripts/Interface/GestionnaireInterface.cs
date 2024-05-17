@@ -5,25 +5,27 @@ using TMPro;
 public class GestionnaireInterface : MonoBehaviour
 {
     [SerializeField] private Button _boutonDemarrer;
-
+    //enumeration pour les niveau
     enum Difficulte
     {
         Facile,
         Moyen,
         Difficile
     }
+    //enum pour les perso dispo
     enum Personnage
     {
         Fermier,
         Fermiere
     }
+    // enum pour les types de foret
     enum Foret
     {
         Grille,
         Random,
         Simulation
     }
-
+    // variable pour stocker les données
     private Difficulte difficulte;
     private Personnage personnage;
     private Foret foret;
@@ -32,24 +34,25 @@ public class GestionnaireInterface : MonoBehaviour
         private set;
         get;
     }
-    public string typeForet
+    public string typeForet 
     {
         private set;
         get;
     }
-
+    //text filed sur le caneva
     [SerializeField] private TMP_InputField nomJoueur;
     [SerializeField] private TMP_Text presentation;
-
+    //tableaux contenant les valeurs des ressources selon le niveau
     [SerializeField] private int[] valeursFacile;
     [SerializeField] private int[] valeursMoyen;
     [SerializeField] private int[] valeursDifficile;
-
+    //tableau des valeures de depart
     [SerializeField] private TMP_Text[] valeursDepart;
+    //les dropdown 
     [SerializeField] private TMP_Dropdown difficulteDropdown;
     [SerializeField] private TMP_Dropdown personnageDropdown;
     [SerializeField] private TMP_Dropdown foretDropdown;
-
+    //Ganeobject des personnage
     [SerializeField] private GameObject personnageFermier;
     [SerializeField] private GameObject personnageFermiere;
     
@@ -88,7 +91,7 @@ public class GestionnaireInterface : MonoBehaviour
                 break;
         }
     }
-
+    // methode pour changer le gameobject du personnage affiché
     public void ChangerPersonnage()
     {
         personnage = (Personnage)personnageDropdown.value;
@@ -107,27 +110,28 @@ public class GestionnaireInterface : MonoBehaviour
             fermier = false;
         }
     }
+    //methode liée au drop down Foret
     public void ChangerForet()
     {
+       
         foret = (Foret)foretDropdown.value;
 
         switch (foret)
         {
-            case Foret.Grille:
-                typeForet = "Grille";
-               
-                break;
             case Foret.Random:
                 typeForet = "Random";
                 break;
             case Foret.Simulation:
                 typeForet = "Simulation";
                 break;
+            default:
+                typeForet = "Grille";
+                break;
         }
     }
 
 
-
+    //methode pour demarer la partie, en mettant à jour les données du singleton
     public void DemarrerPartie()
     {
         int[] valeursActuelles = null;
@@ -168,7 +172,7 @@ public class GestionnaireInterface : MonoBehaviour
         Application.Quit();
 #endif
     }
-
+    //mise à jour des valeurs de départ
     private void MettreAJour(int[] valeurs)
     {
         for (int i = 0; i < valeursDepart.Length; i++)
@@ -176,7 +180,7 @@ public class GestionnaireInterface : MonoBehaviour
             valeursDepart[i].text = valeurs[i].ToString();
         }
     }
-
+    //methode pour changer le nom du joueur
     public void ChangerNomJoueur()
     {
         presentation.text = $"\u266A \u266B Dans la ferme \u00e0  {nomJoueur.text} \u266B \u266A";

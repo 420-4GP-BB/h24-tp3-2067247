@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System;
 using UnityEngine;
 
 public class StrategieRandom : StrategieArbre
@@ -10,7 +9,7 @@ public class StrategieRandom : StrategieArbre
     // Liste pour héberger les rectangles à comparer
     private List<Rect> listeRect = new List<Rect>();
     // Random pour générer les positions au hazard
-    private System.Random _random = new System.Random();
+    //private System.Random _random = new System.Random();
 
     ZoneForet zone1 = ZoneManager.GetZone(ZoneManager.ZoneType.Zone1);
     ZoneForet zone2 = ZoneManager.GetZone(ZoneManager.ZoneType.Zone2);
@@ -24,14 +23,14 @@ public class StrategieRandom : StrategieArbre
     /// <returns>une liste de Vector 3 contenant la position des arbres</returns>
     public override List<Vector3> ChoisirEmplacement()
     {
-       
+       //generation de liste pour chaque zone
         List<Vector3> listeZone1 = PlacerParZone(zone1, 10);
         List<Vector3> listeZone2 = PlacerParZone(zone2, 10);
         List<Vector3> listeZone3 = PlacerParZone(zone3, 10);
         List<Vector3> listeZone4 = PlacerParZone(zone4, 10);
         List<Vector3> listeZone5 = PlacerParZone(zone5, 5);
         List<Vector3> listeZone6 = PlacerParZone(zone6, 5);
-
+        //aggregation des liste en une seule liste 
         listeEmplacement.AddRange(listeZone1);
         listeEmplacement.AddRange(listeZone2);
         listeEmplacement.AddRange(listeZone3);
@@ -67,8 +66,8 @@ public class StrategieRandom : StrategieArbre
             while (!positionTrouve && essais< essaisMax)
             {
                 //generation de postions au hazard
-                float x = GetRandom(zone.xMin, zone.xMax);
-                float z = GetRandom(zone.zMin,zone.zMax);
+                float x = Random.Range(zone.xMin, zone.xMax);
+                float z = Random.Range(zone.zMin,zone.zMax);
                 float largeur = 4f;  
                 float longueur = 4.95f;  
                 // creation d'un rect utilisant les valeur générées
@@ -84,11 +83,12 @@ public class StrategieRandom : StrategieArbre
                         break;
                     }
                 }
+                //incrementation du nombre d'essai
                 essais++;
             }
 
             if (positionTrouve)
-            {
+            {//si une postion est trouvée on l'ajoute à la liste des rect pour pouvoir y comparer les suivants
                 listeRect.Add(rect);
                 listeZone.Add(new Vector3(rect.xMin, 0, rect.yMin));
             }
@@ -99,15 +99,6 @@ public class StrategieRandom : StrategieArbre
 
 
   
-    /// <summary>
-    /// J'ai utilisé chat gpt pour m'aider à trouver un random pour un float
-    /// </summary>
-    /// <param name="min"> le float minimum</param>
-    /// <param name="max"> le float maximum</param>
-    /// <returns> un float ransom entre le min et le max</returns>
-    private float GetRandom(float min, float max)
-    {
-        return (float)(_random.NextDouble() * (max - min) + min);
-    }
+    
 
 }  

@@ -4,34 +4,41 @@ using UnityEngine;
 
 public class Terrain : MonoBehaviour
 {
-    //StrategieArbre strategie = new StrategieGrille();
-    // StrategieArbre strategie = new StrategieRandom();
-    //StrategieArbre strategie = new StrategieSimulation();
-    StrategieArbre strategie = new StrategieSimulation();
+    //strategie de forestation
+    StrategieArbre strategie;
+    //le model à instancier
     [SerializeField] private GameObject arbre;
-    
+    //type de foret
+    string typeForet;
+
 
     // Start is called before the first frame update
     void Start()
-    {
-        
-         foreach (Vector3 position in strategie.ChoisirEmplacement())
-         {
-             Instantiate(arbre, position, Quaternion.identity);
-         }
-       // strategie.ChoisirEmplacement();
-    
-        
+    {    
+//recuperer la valeur dans le singleton
+  typeForet = ParametresParties.Instance.typeForet;
+//switch case pour determiner la bonne instance de strategie
+        switch (typeForet)
+        {
+            case "Grille":
+                strategie = new StrategieGrille();
+                break;
+            case "Random":
+                strategie = new StrategieRandom();
+                break;
+            case "Simulation":
+                strategie = new StrategieSimulation();
+                break;
+           default:
+                strategie = new StrategieGrille();
+               break;
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-       
-    }
-
-
-   
+        }
+        //boucle pour instancier les arbres
+        foreach (Vector3 position in strategie.ChoisirEmplacement())
+        {//chaque arbre devrait avoir une rotation sur l'axe des y au hasard
+            Quaternion quat = Quaternion.Euler(0, Random.Range(-180, 180), 0);
+            Instantiate(arbre, position, quat);
+        }
+    }   
 }

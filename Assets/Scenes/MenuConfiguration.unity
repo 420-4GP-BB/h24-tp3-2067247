@@ -5663,7 +5663,7 @@ MonoBehaviour:
   - {fileID: 912812266}
   difficulteDropdown: {fileID: 1037412195}
   personnageDropdown: {fileID: 1767126933}
-  foretDropdown: {fileID: 0}
+  foretDropdown: {fileID: 482203460}
   personnageFermier: {fileID: 20382126}
   personnageFermiere: {fileID: 1877294263}
 --- !u!4 &1447052501
