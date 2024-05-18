@@ -1,18 +1,19 @@
 public static class ConstantesJeu
 {
-    // Ça représente la quantité d'énergie que le joueur perd à chaque minute
+    // ï¿½a reprï¿½sente la quantitï¿½ d'ï¿½nergie que le joueur perd ï¿½ chaque minute
     // dans le jeu
     public const float COUT_MARCHER = 0.001f;
     public const float COUT_COURIR = 0.005f;
     public const float COUT_PLANTER = 0.002f;
+    public const float COUT_POUSSER = 0.005f;
     public const float COUT_CUEILLIR = 0.001f;
     public const float COUT_IMMOBILE = 0.0001f;
 
-    // Ce que le joueur peut gagner en énergie
+    // Ce que le joueur peut gagner en ï¿½nergie
     public const float GAIN_ENERGIE_MANGER_OEUF = 0.25f;
     public const float GAIN_ENERGIE_MANGER_CHOU = 0.35f;
-    public const float GAIN_ENERGIE_SOMMEIL = 0.005f;    // Le joueur gagne de l'énergie en dormant
+    public const float GAIN_ENERGIE_SOMMEIL = 0.005f;    // Le joueur gagne de l'ï¿½nergie en dormant
 
-    // Constantes relatives au temps dans une journée
+    // Constantes relatives au temps dans une journï¿½e
     public const float MINUTES_PAR_JOUR = 1440.0f;
 }
