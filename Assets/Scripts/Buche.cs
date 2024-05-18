@@ -1,18 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Buche : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
+/// <summary>
+/// code inspiré du code de l'oeuf 
+/// </summary>
+public class Buche : MonoBehaviour, IRamassable
+{//rammasse l'oeuf et met à jour l'inventaire
+    public void Ramasser(Inventaire inventaireJoueur)
     {
-        
+        inventaireJoueur.Buches++;
+        Destroy(gameObject);
+    }
+    //retourne l'etat ramasserObjet
+    public EtatJoueur EtatAUtiliser(ComportementJoueur Sujet)
+    {
+        return new EtatRamasserObjet(Sujet, this);
     }
 
-    // Update is called once per frame
-    void Update()
+    public bool Permis(ComportementJoueur sujet)
     {
-        
+        return true;
     }
 }

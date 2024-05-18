@@ -9,12 +9,13 @@ public class Magasin : MonoBehaviour
     const int PRIX_POULE = 100;
     const int PRIX_GRAINES = 3;
     const int PRIX_CHOUX = 5;
+    const int PRIX_BUCHE = 5;
 
     public static int ITEM_LE_MOINS_CHER
     {
         get => Math.Min(
             Math.Min(PRIX_OEUF, PRIX_POULE),
-            Math.Min(PRIX_GRAINES, PRIX_CHOUX)
+            Math.Min(PRIX_GRAINES, PRIX_CHOUX)   
         );
     }
 
@@ -27,6 +28,8 @@ public class Magasin : MonoBehaviour
     [SerializeField] private TMP_Text _prixGraines;
 
     [SerializeField] private TMP_Text _prixChoux;
+
+    [SerializeField] private TMP_Text _prixBuche;
 
 
     [SerializeField] private TMP_Text _messageBienvenue;
@@ -43,6 +46,8 @@ public class Magasin : MonoBehaviour
 
     [SerializeField] private Button _boutonChoux;
 
+    [SerializeField] private Button _boutonBuche;
+
     private GameObject _joueur;
     private Inventaire _inventaire;
 
@@ -54,6 +59,7 @@ public class Magasin : MonoBehaviour
         _prixPoule.text = PRIX_POULE.ToString();
         _prixGraines.text = PRIX_GRAINES.ToString();
         _prixChoux.text = PRIX_CHOUX.ToString();
+
 
         _joueur = GameObject.FindGameObjectWithTag("Joueur");
         _messageBienvenue.text = $"Bonjour {_joueur.GetComponent<DonneesJoueur>().Nom}, " +
@@ -84,6 +90,12 @@ public class Magasin : MonoBehaviour
             _inventaire.Choux -= 1;
             _inventaire.Or += PRIX_CHOUX;
         });
+
+        _boutonBuche.onClick.AddListener(() =>
+        {
+            _inventaire.Buches -= 1;
+            _inventaire.Or += PRIX_BUCHE;
+        });
     }
 
 // Update is called once per frame
@@ -93,6 +105,7 @@ public class Magasin : MonoBehaviour
         _boutonPoule.interactable = _inventaire.Or >= PRIX_POULE;
         _boutonGraines.interactable = _inventaire.Or >= PRIX_GRAINES;
         _boutonChoux.interactable = _inventaire.Choux >= 1;
+        _boutonBuche.interactable = _inventaire.Buches >= 1;
     }
 
     public void OnTriggerEnter(Collider other)
