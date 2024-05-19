@@ -12,6 +12,7 @@ public static class ConstantesJeu
     // Ce que le joueur peut gagner en �nergie
     public const float GAIN_ENERGIE_MANGER_OEUF = 0.25f;
     public const float GAIN_ENERGIE_MANGER_CHOU = 0.35f;
+    public const float GAIN_ENERGIE_MANGER_COLLATION = 0.15f;
     public const float GAIN_ENERGIE_SOMMEIL = 0.005f;    // Le joueur gagne de l'�nergie en dormant
 
     // Constantes relatives au temps dans une journ�e

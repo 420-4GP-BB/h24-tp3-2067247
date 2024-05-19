@@ -95,11 +95,11 @@ public class ComportementJoueur : MonoBehaviour
     {
         if (_inventaire.Oeuf > 0)
         {
-            // Peut-être qu'on devrait offrir le choix de ce qu'on mange.
-            // Ce qui implique de faire une nouvelle interface pour ça.
+            // Peut-ï¿½tre qu'on devrait offrir le choix de ce qu'on mange.
+            // Ce qui implique de faire une nouvelle interface pour ï¿½a.
             _inventaire.Oeuf--;
             _energieJoueur.Energie += ConstantesJeu.GAIN_ENERGIE_MANGER_OEUF;
-            GestionnaireMessages.Instance.AfficherMessage("Vous mangez un oeuf", "C'était délicieux");
+            GestionnaireMessages.Instance.AfficherMessage("Vous mangez un oeuf", "C'ï¿½tait dï¿½licieux");
             TempsDepuisDernierRepas = 0.0f;
         }
         else if (_inventaire.Choux > 0)
@@ -107,9 +107,15 @@ public class ComportementJoueur : MonoBehaviour
             _inventaire.Choux--;
             _energieJoueur.Energie += ConstantesJeu.GAIN_ENERGIE_MANGER_CHOU;
             GestionnaireMessages.Instance.AfficherMessage("Vous mangez un chou",
-                "C'était... Correct. En salade ça aurait été meilleur");
+                "C'ï¿½tait... Correct. En salade ï¿½a aurait ï¿½tï¿½ meilleur");
             TempsDepuisDernierRepas = 0.0f;
         }
+    }
+
+    public void MangerCollation()
+    {
+        _energieJoueur.Energie += ConstantesJeu.GAIN_ENERGIE_MANGER_COLLATION;
+        TempsDepuisDernierRepas = 0.0f;
     }
 
     internal bool DansMenu()
