@@ -76,7 +76,7 @@ public class Magasin : MonoBehaviour
         _boutonPoule.onClick.AddListener(() =>
         {
             _inventaire.Or -= PRIX_POULE;
-            GameObject poule = Instantiate(_modelePoule);
+            GameObject poule = Instantiate(_modelePoule,_sortieMagasin.transform.position,Quaternion.identity);
         });
 
         _boutonGraines.onClick.AddListener(() =>
