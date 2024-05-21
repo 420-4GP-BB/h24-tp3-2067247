@@ -4,41 +4,44 @@ using UnityEngine;
 
 public class EtatPoursuite : EtatRenard
 {
-    public EtatPoursuite(MouvementRenard renard, GameObject poule) : base(renard, poule)
+    public EtatPoursuite(MouvementRenard renard) : base(renard)
     {
-
     }
 
     public override void Enter()
     {
-        Animateur.SetBool("Walk", true);
-        AgentMouvement.destination =Poule.transform.position; 
+
+      
     }
 
     public override void Handle(float deltaTime)
-    {
-        bool attaque_requise = false;
-        if (!JoueurVisible())
-        {
-            MouvementRenard mouvement = Renard.GetComponent<MouvementRenard>();
-            mouvement.ChangerEtat(mouvement.Patrouille);
+    {//verifie si la poule est nulle
+        if (PouleAchasser == null)
+        {//verife si il voit une poule 
+            PouleAchasser = PouleVisible();
+            if (PouleAchasser == null)
+            {//si elle est encore nulle il change d'etat pour aller en patrouille
+                Renard.ChangerEtat(Renard.Patrouille);
+                return;
+            }
         }
-        else
-        {
-            AgentMouvement.destination = Poule.transform.position;
-            attaque_requise = Vector3.Distance(Renard.transform.position, Poule.transform.position) <= 3.0f;
-        }
-
+        //sinon il poursuit la poule
+        AgentMouvement.destination = PouleAchasser.transform.position;
+        //si il est a 1 unité ou moins,le bool vaut vrai
+        bool attaque_requise = Vector3.Distance(Renard.transform.position, PouleAchasser.transform.position) <= 1.0f;
+        //si le bool vaut vrai, il mange la poule (on détruit le gameObject)
         if (attaque_requise)
         {
-
-            GameObject.Destroy(Poule);
+            GameObject.Destroy(PouleAchasser);
+            PouleAchasser = null;
+            //il change d'état pour revenir en patrouille
+            Renard.ChangerEtat(Renard.Patrouille);
         }
     }
 
     public override void Leave()
     {
-        Animateur.SetBool("Walk", false);
+
 
     }
 }

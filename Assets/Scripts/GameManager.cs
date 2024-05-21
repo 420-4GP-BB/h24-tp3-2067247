@@ -1,12 +1,18 @@
 using System.Numerics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Quaternion = UnityEngine.Quaternion;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private Soleil _soleil;
     [SerializeField] private GameObject fermier;
     [SerializeField] private GameObject fermiere;
+    // positionRenard
+    [SerializeField] private GameObject posRenard;
+    //model du renard
+    [SerializeField] private GameObject PrefabRenard;
+    private GameObject Renard;
     private ComportementJoueur _joueur;
     private const float DISTANCE_ACTION = 3.0f;
 
@@ -71,6 +77,31 @@ public class GameManager : MonoBehaviour
 
         // L'?tat du joueur peut affecter le passage du temps (ex.: Dodo: tout va vite, menus: le temps est stopp?, etc)
         Time.timeScale *= _joueur.GetComponent<ComportementJoueur>().MultiplicateurScale;
+
+       
+    }
+    //J'ai L,instanciation/destruction du renard dans un fixed update car on a pas besoin de verifier aussi fréquemment que dans une update normal
+
+    private void FixedUpdate()
+    {
+        if (_soleil.EstNuitRenard)
+        {
+            //Verifier si c'est la nuit et que le renard n'est pas déjà instancié
+            if (Renard == null)
+            {
+                // Instancier le renard à la position de départ sans rotation
+                Renard = Instantiate(PrefabRenard, posRenard.transform.position, Quaternion.identity);
+            }
+        }
+        else
+        {
+            // Verifier si ce n'est pas la nuit et que le renard existe 
+            if (Renard != null)
+            {
+                // Détruire l'objet renard
+                Destroy(Renard);
+            }
+        }
     }
 
     /// <summary>

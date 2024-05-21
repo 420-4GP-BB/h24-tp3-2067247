@@ -10,6 +10,7 @@ TagManager:
   - Femme
   - Joueur
   - SansArbre
+  - PointRenard
   layers:
   - Default
   - TransparentFX

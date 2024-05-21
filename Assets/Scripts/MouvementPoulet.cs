@@ -1,29 +1,34 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class MouvementPoulet : MonoBehaviour
 {
-    //cette zone s'étant sur toute la ferme 
+    //cette zone s'étant sur toute la ferme
      private UnityEngine.GameObject _zoneRelachement;
      private UnityEngine.GameObject joueur;
      private bool _suivreJoueur = true;
     //distance à respecter par les poules
     private float distanceDuJoueur = 2f;
+    private Soleil _soleil;
+    private GameObject pointSpecial;
 
     private NavMeshAgent _agent;
     private Animator _animator;
 
-    private GameObject[] _pointsDeDeplacement;
+    private List<GameObject> _pointsDeDeplacement = new List<GameObject>();
 
     void Start()
     {
         _zoneRelachement = UnityEngine.GameObject.Find("ZoneRelachePoulet");
-         joueur = UnityEngine.GameObject.FindGameObjectWithTag("Joueur");
+        pointSpecial= UnityEngine.GameObject.Find("PointRenardSpecial");
+        _soleil = UnityEngine.GameObject.Find("Directional Light").GetComponent<Soleil>();
+        joueur = UnityEngine.GameObject.FindGameObjectWithTag("Joueur");
         //Les poulet commence par suivre le joueur
         _suivreJoueur = true;
         _animator = GetComponent<Animator>();
         _agent = GetComponent<NavMeshAgent>();
-        _pointsDeDeplacement = GameObject.FindGameObjectsWithTag("PointsPoulet");
+        _pointsDeDeplacement.AddRange(GameObject.FindGameObjectsWithTag("PointsPoulet"));
         _animator.SetBool("Walk", true);
         
     }
@@ -31,7 +36,7 @@ public class MouvementPoulet : MonoBehaviour
 
     void ChoisirDestinationAleatoire()
     {
-        GameObject point = _pointsDeDeplacement[Random.Range(0, _pointsDeDeplacement.Length)];
+        GameObject point = _pointsDeDeplacement[Random.Range(0, _pointsDeDeplacement.Count)];
         _agent.SetDestination(point.transform.position);
     }
 
@@ -70,12 +75,32 @@ public class MouvementPoulet : MonoBehaviour
 
        
     }
+    private void FixedUpdate()
+    {
+        if (_soleil.EstNuitRenard)
+        {
+            if (!_pointsDeDeplacement.Contains(pointSpecial))
+            {
+                _pointsDeDeplacement.Add(pointSpecial);
+                Debug.Log("PointAJouté: " + _pointsDeDeplacement.Count);
+            }
+                
+        }
+        else
+        {
+            if (_pointsDeDeplacement.Contains(pointSpecial))
+            {
+                _pointsDeDeplacement.Remove(pointSpecial);
+                Debug.Log("Point retiré: " + _pointsDeDeplacement.Count);
+            }
+        }
+    }
 
     void Initialiser()
     {
         // Position quand la poule arrive sur la ferme
         _agent.enabled = false;
-        var point = _pointsDeDeplacement[Random.Range(0, _pointsDeDeplacement.Length)];
+        var point = _pointsDeDeplacement[Random.Range(0, _pointsDeDeplacement.Count)];
         _agent.enabled = true;
         _agent.destination = point.transform.position;
 

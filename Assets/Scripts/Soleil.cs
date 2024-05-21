@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class Soleil : MonoBehaviour
 {
-    // Il faut s'enregistrer pour être notifié de la fin de la journée
+    // Il faut s'enregistrer pour ï¿½tre notifiï¿½ de la fin de la journï¿½e
     public event Action OnJourneeTerminee;
 
 
-    // Le temps en minutes de jeu écoulées entre deux images
+    // Le temps en minutes de jeu ï¿½coulï¿½es entre deux images
     public float DeltaMinutesEcoulees
     {
         get
@@ -28,20 +28,24 @@ public class Soleil : MonoBehaviour
     }
 
     /// <summary>
-    /// Proportion de la journée qui reste à écouler
-    /// Valeur qui diminue, tout de suite après minuit on est à 1.0 et on diminue avec le temps jusqu'à 0.0
+    /// Proportion de la journï¿½e qui reste ï¿½ ï¿½couler
+    /// Valeur qui diminue, tout de suite aprï¿½s minuit on est ï¿½ 1.0 et on diminue avec le temps jusqu'ï¿½ 0.0
     /// </summary>
     public float ProportionRestante => dureeJourneeRestante / dureeJournee;
 
     /// <summary>
-    /// Indique si on est présentement pendant la nuit (entre 21h et 5h am)
+    /// Indique si on est prï¿½sentement pendant la nuit (entre 21h et 5h am)
     /// </summary>
     public bool EstNuit => ProportionRestante >= progression21h || ProportionRestante <= progression5h;
+    /// <summary>
+    /// Indique si on est prï¿½sentement pendant la nuit,si le renard peut roder (entre 21h et 8h am)
+    /// </summary>
+    public bool EstNuitRenard => ProportionRestante >= progression21h || ProportionRestante <= progression8h;
 
     [Header("Rotation pour changer graduellement la direction des ombres")]
     [SerializeField] private Vector3 rotationDepart;
     [SerializeField] private Vector3 rotationFin;
-    [Header("Couleurs projetées par le soleil")]
+    [Header("Couleurs projetï¿½es par le soleil")]
     [SerializeField] private Color morningColor;
     [SerializeField] private Color noonColor;
     [SerializeField] private Color nightColor;
@@ -52,7 +56,7 @@ public class Soleil : MonoBehaviour
     private float dureeJournee = ConstantesJeu.MINUTES_PAR_JOUR; // 24 heures
     private float dureeJourneeRestante;
 
-    // Pour les différentes phases de la journée
+    // Pour les diffï¿½rentes phases de la journï¿½e
     private const float progression21h = 21.0f / 24;
     private const float progression5h = 5.0f / 24;
     private const float progression8h = 8.0f / 24;
@@ -64,7 +68,7 @@ public class Soleil : MonoBehaviour
         _light = GetComponent<Light>();
         noonColor = _light.color;
 
-        // On commence la première journée à 8:00
+        // On commence la premiï¿½re journï¿½e ï¿½ 8:00
         dureeJourneeRestante = dureeJournee * (1 - progression8h); // Il reste 16 heures de jour
         _ancienPourcentage = 1 - ProportionRestante;
     }
@@ -72,15 +76,15 @@ public class Soleil : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Pour le calcul du nombre de minutes écoulées
+        // Pour le calcul du nombre de minutes ï¿½coulï¿½es
         _ancienPourcentage = 1 - ProportionRestante;
 
         dureeJourneeRestante -= Time.deltaTime * vitesse;
 
         float progression = 1 - ProportionRestante;
 
-        // De 22h00 à 4h00, il doit faire noir.
-        // Pas assez noir à mon goût
+        // De 22h00 ï¿½ 4h00, il doit faire noir.
+        // Pas assez noir ï¿½ mon goï¿½t
         if (progression >= progression21h || progression <= progression5h)
         {
             _light.color = nightColor;

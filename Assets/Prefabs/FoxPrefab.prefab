@@ -806,7 +806,7 @@ GameObject:
   - component: {fileID: -8201642115817303086}
   - component: {fileID: 1081474333149385327}
   m_Layer: 0
-  m_Name: Fox
+  m_Name: FoxPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
