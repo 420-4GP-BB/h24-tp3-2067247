@@ -4,7 +4,7 @@ using UnityEngine.AI;
 
 public class MouvementRenard : MonoBehaviour
 {
-    [SerializeField] private Transform[] _pointsPatrouille;
+    [SerializeField] private GameObject[] _pointsPatrouille;
     private NavMeshAgent _agent;
     private int _indexPatrouille;
     private Animator _animator;
@@ -29,8 +29,9 @@ public class MouvementRenard : MonoBehaviour
     {
         _agent = GetComponent<NavMeshAgent>();
         _indexPatrouille = 0;
-        _agent.destination = _pointsPatrouille[_indexPatrouille].position;
+        _agent.destination = _pointsPatrouille[_indexPatrouille].transform.position;
         _animator = GetComponent<Animator>();
+        _animator.SetBool("walk", true);
         GameObject joueur = GameObject.Find("Joueur");
         Patrouille = new EtatPatrouille(this, joueur, _pointsPatrouille);
         Poursuite = new EtatPoursuite(this, joueur);

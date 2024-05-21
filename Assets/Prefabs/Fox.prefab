@@ -804,6 +804,7 @@ GameObject:
   - component: {fileID: 4361374554138886284}
   - component: {fileID: 7666986768240843510}
   - component: {fileID: -8201642115817303086}
+  - component: {fileID: 1081474333149385327}
   m_Layer: 0
   m_Name: Fox
   m_TagString: Untagged
@@ -838,7 +839,7 @@ Animator:
   m_GameObject: {fileID: 4020983980232809014}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 91e4778cdfb185d4d9bfe81556dc4333, type: 3}
-  m_Controller: {fileID: 9100000, guid: 0c5b7ffa0a986b24ea0ddfc7e545c76b, type: 2}
+  m_Controller: {fileID: 9100000, guid: b65f65bcc37ad47e9ab45beb5163dfc9, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -871,6 +872,24 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1081474333149385327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4020983980232809014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c5399759509f47c89511f20863708f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pointsPatrouille:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &4246927435662846628
 GameObject:
   m_ObjectHideFlags: 0

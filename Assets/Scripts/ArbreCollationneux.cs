@@ -6,6 +6,7 @@ public class ArbreCollationneux : MonoBehaviour
 {
     //tableau contenant les prefabs des collations
     [SerializeField] private GameObject[] collations;
+
   
     private Vector3 position;
     // Start is called before the first frame update

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class EtatPatrouille : EtatRenard
 {
-    private Transform[] _points;
+    private GameObject[] _points;
     private int _indexPatrouille;
-    public EtatPatrouille(MouvementRenard renard, GameObject poule, Transform[] points) : base(renard, poule)
+    public EtatPatrouille(MouvementRenard renard, GameObject poule, GameObject[] points) : base(renard, poule)
     {
         _points = points;
         _indexPatrouille = 0;
@@ -23,7 +23,7 @@ public class EtatPatrouille : EtatRenard
         {
             if (AgentMouvement.remainingDistance <= 0.1f)
             {
-                AgentMouvement.destination = _points[_indexPatrouille].position;
+                AgentMouvement.destination = _points[_indexPatrouille].transform.position;
                 _indexPatrouille = (_indexPatrouille + 1) % _points.Length;
             }
         }
@@ -37,6 +37,5 @@ public class EtatPatrouille : EtatRenard
 
     public override void Leave()
     {
-        throw new System.NotImplementedException();
     }
 }

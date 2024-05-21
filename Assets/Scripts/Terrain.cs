@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Terrain : MonoBehaviour
+public class ScriptTerrain : MonoBehaviour
 {
     //strategie de forestation
     StrategieArbre strategie;
