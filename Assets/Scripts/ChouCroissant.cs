@@ -33,7 +33,7 @@ public class ChouCroissant : MonoBehaviour
     }
 
 
-    private void JourneePassee()
+    public void JourneePassee()
     {
         journeesDeVie++;
 
@@ -45,7 +45,7 @@ public class ChouCroissant : MonoBehaviour
             return;
         }
 
-        // Utilise le mesh approprié
+        // Utilise le mesh appropriï¿½
         if (Pret)
         {
             ChouPret();

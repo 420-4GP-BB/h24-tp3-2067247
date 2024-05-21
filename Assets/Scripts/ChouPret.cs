@@ -16,6 +16,8 @@ public class ChouPret : MonoBehaviour, IRamassable
         // Cueillir
         _chouMesh3D.CacherObjets();
         inventaireJoueur.Choux++;
+        //on rajoute le component <EmplacementChouVide> car il est detruit quand on plante une graine.
+        gameObject.AddComponent<EmplacementChouVide>();
         Destroy(this);
     }
 
