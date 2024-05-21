@@ -6,6 +6,8 @@ public class ArbreCollationneux : MonoBehaviour
 {
     //tableau contenant les prefabs des collations
     [SerializeField] private GameObject[] collations;
+    //variable pour contenir la coroutine
+    private Coroutine coroutine;
 
   
     private Vector3 position;
@@ -13,14 +15,17 @@ public class ArbreCollationneux : MonoBehaviour
     void Start()
     {
 
-        StartCoroutine(genererCollation());
+        coroutine = StartCoroutine(genererCollation());
 
 
     }
     private void Update()
     {
-        StopCoroutine(genererCollation());
-        StartCoroutine(genererCollation());
+ //verifie qu'il n,y a pas déjà une collation ou une coroutine de commencée
+        if (transform.childCount == 0 && coroutine == null)
+        {
+            coroutine = StartCoroutine(genererCollation());
+        }
     }
 
     /// <summary>
@@ -31,18 +36,19 @@ public class ArbreCollationneux : MonoBehaviour
     private IEnumerator genererCollation()
     {
         // attendre pour 30 secondes
-        yield return new WaitForSeconds(30f);
+        
         //générer un random entre 0 et 2
         int indice = Random.Range(0,2);
 
         // Verifier si l'arbre a déjà une collation non-mangée
-        if (transform.childCount == 0)
-        {
+        
+            yield return new WaitForSeconds(30f);
             //instancier la collation en mettant l'arbre comme parent
             GameObject instantiatedObject = Instantiate(collations[indice], position, Quaternion.identity, transform);
 
             // ajuster la position de la collation
             instantiatedObject.transform.localPosition = new Vector3(1.5f, 3f, 0f);
-        }
+        coroutine = null;
+        
     }
 }
