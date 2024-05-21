@@ -1,6 +1,6 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-
 public class EtatAction : EtatJoueur
 {
     public override bool EstActif => true;
@@ -24,10 +24,38 @@ public class EtatAction : EtatJoueur
         Animateur.SetBool("Walking", true);
         ControleurMouvement.enabled = false;
         _navMeshAgent.enabled = true;
+
         Vector3 direction = _destination.transform.position - Sujet.transform.position;
-        Sujet.transform.rotation = Quaternion.LookRotation(direction);
+        Quaternion rotationCible = Quaternion.LookRotation(direction);
+
+        //Enclencher la coroutine pour effectuer la rotation graduelle sur 0.25 secondes
+        Sujet.StartCoroutine(RotationGraduelle(rotationCible, 0.25f));
+    }
+    //cette méthode est inspirée de l'exerice 8 du module 3
+    /// <summary>
+    /// Méthode qui permet de faire une rotation graduelle du jour pour le diriger vers l'objet actionnable,
+    /// avant qu'il commence de marcher
+    /// </summary>
+    /// <param name="rotationCible">la direction  de l'objet actionnable</param>
+    /// <param name="dureeRotation">la durée de la rotation 0.25 secondes</param>
+    /// <returns>la coroutine qui permet une roation graduelle</returns>
+    private IEnumerator RotationGraduelle(Quaternion rotationCible, float dureeRotation)
+    {//on prend garde en mémoire la roation initiale pour la réutiliser dans le slerp
+        Quaternion rotationInitiale = Sujet.transform.rotation;
+        //variable pour stocker le temps
+        float tempsEcoule = 0f;
+        //boucle pour la roation graduelle
+        while (tempsEcoule < dureeRotation)
+        {
+            tempsEcoule += Time.deltaTime;
+            float pourcentage = Mathf.Clamp01(tempsEcoule / dureeRotation);
+            Sujet.transform.rotation = Quaternion.Slerp(rotationInitiale, rotationCible, pourcentage);
+            yield return null;
+        }
+
+        // Une fois la rotation terminée, on définit la destination du NavMesh agent
         Vector3 pointProche = _destination.GetComponent<Collider>().ClosestPoint(Sujet.transform.position);
-        pointDestination = pointProche - direction.normalized * 0.3f;
+        pointDestination = pointProche - (rotationCible * Vector3.forward) * 0.3f;
         _navMeshAgent.SetDestination(pointDestination);
     }
 
@@ -48,41 +76,8 @@ public class EtatAction : EtatJoueur
             }
         }
 
-        //Vector3 direction = _destination.transform.position - Sujet.transform.position;
-        //Sujet.transform.rotation = Quaternion.LookRotation(direction);
-        //Vector3 pointProche = _destination.GetComponent<Collider>().ClosestPoint(Sujet.transform.position);
-        //Vector3 pointDestination = pointProche - direction.normalized * 0.1f;
-
-        //if (Vector3.Distance(Sujet.transform.position, pointDestination) > 0.1f)
-        //{
-        //    float distanceAvant = Vector3.Distance(Sujet.transform.position, pointDestination);
-        //    ControleurMouvement.SimpleMove(Sujet.transform.forward * (Sujet.VitesseDeplacement));
-
-        //    Il faudrait peut - ?tre essayer avec un NavMesh ici
-        //    Sujet.transform.Translate(Sujet.transform.forward * (Sujet.VitesseDeplacement * Time.deltaTime), Space.World);
-        //    Sujet.transform.rotation = Quaternion.Euler(0, Sujet.transform.rotation.eulerAngles.y, 0);
-        //    float distanceApres = Vector3.Distance(Sujet.transform.position, pointDestination);
-
-        //}
-        //else
-        //{
-        //    ControleurMouvement.enabled = false;
-        //    Sujet.transform.position = pointDestination;
-
-        //    Chou chou = _destination.GetComponent<Chou>();
-        //    if (chou != null)
-        //    {
-        //        Sujet.ChangerEtat(new PlanterChou(Sujet, chou));
-        //    }
-
-        //    Oeuf oeuf = _destination.GetComponent<Oeuf>();
-        //    if (oeuf != null)
-        //    {
-        //        Sujet.ChangerEtat(new RamasserOeuf(Sujet, oeuf));
-        //    }
-        //    ControleurMouvement.enabled = true;
-        //}
     }
+
 
     public override void Exit()
     {
