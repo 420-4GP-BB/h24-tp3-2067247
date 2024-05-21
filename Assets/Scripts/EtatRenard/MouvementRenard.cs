@@ -3,21 +3,17 @@ using System.Collections;
 using UnityEngine.AI;
 
 public class MouvementRenard : MonoBehaviour
-{
+{//Les points de patrouille de renard
     private GameObject[] _pointsPatrouille;
-    private GameObject[] poules;
-    private NavMeshAgent _agent;
-    private int _indexPatrouille;
-    private Animator _animator;
-
+    //l'etat courant du renard
     private EtatRenard _etat;
-
+    //declaration etat Patrouille 
     public EtatPatrouille Patrouille
     {
         private set;
         get;
     }
-
+    // declaration etatPoursuite
     public EtatPoursuite Poursuite
     {
         private set;
@@ -26,18 +22,14 @@ public class MouvementRenard : MonoBehaviour
 
     void Start()
     {
-
+        //lecture des points de patrouille
         _pointsPatrouille = GameObject.FindGameObjectsWithTag("PointRenard");
-        poules = GameObject.FindGameObjectsWithTag("Poule");
+        //creation des etats du renard
         Patrouille = new EtatPatrouille(this, _pointsPatrouille);
         Poursuite = new EtatPoursuite(this);
+        //affection de l'etat de patrouille en premier
         _etat = Patrouille;
         _etat.Enter();
-        _agent = GetComponent<NavMeshAgent>();
-        _indexPatrouille = 0;
-        _agent.destination = _pointsPatrouille[_indexPatrouille].transform.position;
-      
-        
     }
 
     // Update is called once per frame
@@ -45,7 +37,7 @@ public class MouvementRenard : MonoBehaviour
     {
         _etat.Handle(Time.deltaTime);
     }
-
+    //methode pour naviguer entre les etats
     public void ChangerEtat(EtatRenard nouvelEtat)
     {
         _etat.Leave();

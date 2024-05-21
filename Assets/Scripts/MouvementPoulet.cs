@@ -15,7 +15,7 @@ public class MouvementPoulet : MonoBehaviour
 
     private NavMeshAgent _agent;
     private Animator _animator;
-
+    //J'ai du transformer le array en list car on a besoin qu'ele soit dynamique pour ajouter et retirer le point spécial
     private List<GameObject> _pointsDeDeplacement = new List<GameObject>();
 
     void Start()
@@ -75,23 +75,24 @@ public class MouvementPoulet : MonoBehaviour
 
        
     }
+    //J'ai mis l'ajout/ retrait du point dans un fixed update car on a pas besoin de verifier aussi fréquemment que dans une update normal
     private void FixedUpdate()
-    {
+    {//le point special est ajouté seulement si il est le temps du renard
         if (_soleil.EstNuitRenard)
-        {
+        {// il est ahouté seulement si il n'existe pas deja
             if (!_pointsDeDeplacement.Contains(pointSpecial))
             {
                 _pointsDeDeplacement.Add(pointSpecial);
-                Debug.Log("PointAJouté: " + _pointsDeDeplacement.Count);
+      
             }
                 
         }
         else
-        {
+        {//il est retiré durant la journée, seulement si il existe
             if (_pointsDeDeplacement.Contains(pointSpecial))
             {
                 _pointsDeDeplacement.Remove(pointSpecial);
-                Debug.Log("Point retiré: " + _pointsDeDeplacement.Count);
+              
             }
         }
     }
