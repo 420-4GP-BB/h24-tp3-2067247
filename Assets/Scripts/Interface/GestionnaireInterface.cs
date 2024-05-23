@@ -12,7 +12,7 @@ public class GestionnaireInterface : MonoBehaviour
         Moyen,
         Difficile
     }
-    //enum pour les perso dispo
+    //enum pour les personnages disponible
     enum Personnage
     {
         Fermier,
@@ -25,7 +25,7 @@ public class GestionnaireInterface : MonoBehaviour
         Random,
         Simulation
     }
-    // variable pour stocker les données
+    // variables pour stocker les données
     private Difficulte difficulte;
     private Personnage personnage;
     private Foret foret;
@@ -52,7 +52,7 @@ public class GestionnaireInterface : MonoBehaviour
     [SerializeField] private TMP_Dropdown difficulteDropdown;
     [SerializeField] private TMP_Dropdown personnageDropdown;
     [SerializeField] private TMP_Dropdown foretDropdown;
-    //Ganeobject des personnage
+    //Gameobject des personnage
     [SerializeField] private GameObject personnageFermier;
     [SerializeField] private GameObject personnageFermiere;
     
@@ -154,6 +154,7 @@ public class GestionnaireInterface : MonoBehaviour
         ParametresParties.Instance.SemencesDepart = valeursActuelles[2];
         ParametresParties.Instance.TempsCroissance = valeursActuelles[3];
         ParametresParties.Instance.DelaiCueillete = valeursActuelles[4];
+        //importer les valeurs des paramètres dans l'instance du singleton
         ParametresParties.Instance.fermier = fermier;
         ParametresParties.Instance.typeForet = typeForet;
 

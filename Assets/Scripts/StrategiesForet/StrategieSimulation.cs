@@ -38,7 +38,7 @@ public class StrategieSimulation : StrategieArbre
     /// Méthode pour remplir initialement le tableau de vérité, chaque case a 70% de chance d'etre true
     /// </summary>
     /// <param name="zone"> prend la zone en parametre</param>
-    /// <returns>retourne un tableau 2d de boolean</returns>
+    /// <returns>retourne un tableau 2d de bool</returns>
     public bool[,] RemplirIntialement(ZoneForet zone)
     {
         bool[,] grille = new bool[zone.ligne, zone.colonne];
@@ -56,7 +56,7 @@ public class StrategieSimulation : StrategieArbre
         return grille;
     }
     /// <summary>
-    /// Méthode pour déclanger les 10 génération de la simulation de foret
+    /// Méthode pour déclancher les 10 génération de la simulation de foret, J'ai utilisé chat gpt pour m'aider à circuler entre les voisins
     /// </summary>
     /// <param name="zone">une zone de terrain</param>
     /// <returns>un tableau de verité  </returns>
@@ -138,7 +138,7 @@ public class StrategieSimulation : StrategieArbre
                 float x = zone.xMin + j * largeurCellule;
                 float z = zone.zMin + i * profondeurCellule;
 
-                // décalage aléatoire à x et z pour de paraitre comme une grille
+                // décalage aléatoire à x et z pour éviter de paraitre comme une grille
                 x += Random.Range(-1.25f, 1.25f);
                 z += Random.Range(-1.25f, 1.25f);
 

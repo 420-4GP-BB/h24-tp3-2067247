@@ -111,10 +111,11 @@ public class ComportementJoueur : MonoBehaviour
             TempsDepuisDernierRepas = 0.0f;
         }
     }
-
+    //methode pour augmenter l'énergie quand le joueur mange la collation
     public void MangerCollation()
     {
         _energieJoueur.Energie += ConstantesJeu.GAIN_ENERGIE_MANGER_COLLATION;
+        //reinitialisation du temps depuis le dernier repas
         TempsDepuisDernierRepas = 0.0f;
     }
 

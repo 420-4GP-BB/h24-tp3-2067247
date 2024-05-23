@@ -4,7 +4,7 @@ using UnityEngine.AI;
 
 public class MouvementPoulet : MonoBehaviour
 {
-    //cette zone s'étant sur toute la ferme
+    //cette zone s'étend sur toute la ferme
      private UnityEngine.GameObject _zoneRelachement;
      private UnityEngine.GameObject joueur;
      private bool _suivreJoueur = true;
@@ -65,7 +65,7 @@ public class MouvementPoulet : MonoBehaviour
 
         }
         else
-        {
+        {//quand le poulet arrive sur la ferme , il appelle la methode pour generer les points
             if (!_agent.pathPending && _agent.remainingDistance < 0.5f)
             {
                 ChoisirDestinationAleatoire();
@@ -79,7 +79,7 @@ public class MouvementPoulet : MonoBehaviour
     private void FixedUpdate()
     {//le point special est ajouté seulement si il est le temps du renard
         if (_soleil.EstNuitRenard)
-        {// il est ahouté seulement si il n'existe pas deja
+        {// il est ajouté seulement si il n'existe pas deja
             if (!_pointsDeDeplacement.Contains(pointSpecial))
             {
                 _pointsDeDeplacement.Add(pointSpecial);
@@ -109,6 +109,7 @@ public class MouvementPoulet : MonoBehaviour
 
         ChoisirDestinationAleatoire();
     }
+    //trigger pour que les poules arretent de suivre le joueur quand elles arrivent à la ferme
     private void OnTriggerEnter(Collider other)
     {
         // verifier que le trigger vient de la zone de relachement

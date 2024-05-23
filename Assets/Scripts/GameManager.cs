@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     public int NumeroJour = 1;
 
     private void Awake()
-    {
+    {//set up du personnage avant tout
         if (ParametresParties.Instance.fermier)
         {
             fermiere.SetActive(false);

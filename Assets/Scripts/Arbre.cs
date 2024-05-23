@@ -5,7 +5,7 @@ using UnityEngine;
 public class Arbre : MonoBehaviour, IPoussable
 {
     //prefab de la buche à instancier
-   [SerializeField] private GameObject logPrefab; // Reference to the log object
+   [SerializeField] private GameObject logPrefab; 
     /// <summary>
     /// methode de l'interface IPoussable
     /// </summary>
@@ -48,7 +48,7 @@ public class Arbre : MonoBehaviour, IPoussable
             yield return null;
         }
 
-        //verifier que l'arbre soit complétement tombé
+        //S'assurer  que l'arbre soit complétement tombé
         transform.Rotate(joueur.transform.right, (dureeTombee - tempsEcoule) * vitesseTombee, Space.World);
 
         // attendre pour une seconde avant de baisser l'arbre dans le sol
@@ -60,7 +60,7 @@ public class Arbre : MonoBehaviour, IPoussable
         // la hauteur de l'arbre
         float hauteur = -3f;
 
-        // calcul de la position de la buch
+        // calcul de la position de la buche
         Vector3 positionBuche = transform.position + direction * hauteur;
         positionBuche.y = 0.26f; 
             //rotation de la buche pour pas qu'elle soit debout
@@ -73,7 +73,7 @@ public class Arbre : MonoBehaviour, IPoussable
         float dureDescente = 0.5f;
         tempsEcoule = 0f;
         Vector3 positionInitiale = transform.position;
-        Vector3 positionFinale = positionInitiale - new Vector3(0, 1f, 0); // Adjust the amount to move downwards as needed
+        Vector3 positionFinale = positionInitiale - new Vector3(0, 1f, 0); 
 
         while (tempsEcoule < dureDescente)
         {
@@ -82,7 +82,7 @@ public class Arbre : MonoBehaviour, IPoussable
             yield return null;
         }
 
-        // verifier que l'arbre est completement sous le sol
+        // S'assurer que l'arbre est completement sous le sol
         transform.position = positionFinale;
 
         // disparition de l'arbre

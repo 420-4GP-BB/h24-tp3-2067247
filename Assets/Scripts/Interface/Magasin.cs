@@ -29,8 +29,9 @@ public class Magasin : MonoBehaviour
 
     [SerializeField] private TMP_Text _prixChoux;
 
-    [SerializeField] private TMP_Text _prixBuche;
+    //ajout du prix du tmp du prix la buche
 
+    [SerializeField] private TMP_Text _prixBuche;
 
     [SerializeField] private TMP_Text _messageBienvenue;
 
@@ -59,6 +60,7 @@ public class Magasin : MonoBehaviour
         _prixPoule.text = PRIX_POULE.ToString();
         _prixGraines.text = PRIX_GRAINES.ToString();
         _prixChoux.text = PRIX_CHOUX.ToString();
+        _prixBuche.text = PRIX_BUCHE.ToString();
 
 
         _joueur = GameObject.FindGameObjectWithTag("Joueur");

@@ -23,13 +23,13 @@ public class StrategieRandom : StrategieArbre
     /// <returns>une liste de Vector 3 contenant la position des arbres</returns>
     public override List<Vector3> ChoisirEmplacement()
     {
-       //generation de liste pour chaque zone
-        List<Vector3> listeZone1 = PlacerParZone(zone1, 10);
-        List<Vector3> listeZone2 = PlacerParZone(zone2, 10);
-        List<Vector3> listeZone3 = PlacerParZone(zone3, 10);
-        List<Vector3> listeZone4 = PlacerParZone(zone4, 10);
-        List<Vector3> listeZone5 = PlacerParZone(zone5, 5);
-        List<Vector3> listeZone6 = PlacerParZone(zone6, 5);
+        //generation de liste pour chaque zone
+        List<Vector3> listeZone1 = PlacerParZone(zone1);
+        List<Vector3> listeZone2 = PlacerParZone(zone2);
+        List<Vector3> listeZone3 = PlacerParZone(zone3);
+        List<Vector3> listeZone4 = PlacerParZone(zone4);
+        List<Vector3> listeZone5 = PlacerParZone(zone5);
+        List<Vector3> listeZone6 = PlacerParZone(zone6);
         //aggregation des liste en une seule liste 
         listeEmplacement.AddRange(listeZone1);
         listeEmplacement.AddRange(listeZone2);
@@ -37,7 +37,7 @@ public class StrategieRandom : StrategieArbre
         listeEmplacement.AddRange(listeZone4);
         listeEmplacement.AddRange(listeZone5);
         listeEmplacement.AddRange(listeZone6);
-        
+
 
         return listeEmplacement;
 
@@ -50,45 +50,33 @@ public class StrategieRandom : StrategieArbre
     /// <param name="zMin">l'axe z minimum délimitant la zone</param>
     /// <param name="zMax">l'axe z maximum délimitant la zone</param>
     /// <param name="nombreArbre">le nombre d'arbre à générer dans la zone</param>
-    /// <param name="essaisMax"> le nombre d'itération max pour eviter une boucle infinie</param>
     /// <returns></returns>
-    private List<Vector3> PlacerParZone(ZoneForet zone ,int essaisMax)
+    private List<Vector3> PlacerParZone(ZoneForet zone)
     {
-        List<Vector3> listeZone = new List<Vector3>(); 
-        
+        List<Vector3> listeZone = new List<Vector3>();
+
 
         for (int i = 0; i < zone.nombreArbre; i++)
         {
-            bool positionTrouve = false;
-            Rect rect = new Rect();
-            int essais= 0;
-
-            while (!positionTrouve && essais< essaisMax)
+            bool positionTrouve = true;
+            //generation de postions au hazard
+            float x = Random.Range(zone.xMin, zone.xMax);
+            float z = Random.Range(zone.zMin, zone.zMax);
+            float largeur = 4f;
+            float longueur = 4.95f;
+            // creation d'un rect utilisant les valeur générées
+            Rect rect = new Rect(x, z, largeur, longueur);
+            // Verifier si le nouvel arbre chevauche un arbre existant, si oui positionTrouvée vaut faux
+            foreach (Rect existingRect in listeRect)
             {
-                //generation de postions au hazard
-                float x = Random.Range(zone.xMin, zone.xMax);
-                float z = Random.Range(zone.zMin,zone.zMax);
-                float largeur = 4f;  
-                float longueur = 4.95f;  
-                // creation d'un rect utilisant les valeur générées
-                rect = new Rect(x, z, largeur, longueur);
-                positionTrouve = true;
-
-                // Verifier si le nouvel arbre chevauche un arbre existant
-                foreach (Rect existingRect in listeRect)
+                if (rect.Overlaps(existingRect))
                 {
-                    if (rect.Overlaps(existingRect))
-                    {
-                        positionTrouve = false;
-                        break;
-                    }
+                    positionTrouve = false;
+                    break;
                 }
-                //incrementation du nombre d'essai
-                essais++;
             }
-
             if (positionTrouve)
-            {//si une postion est trouvée on l'ajoute à la liste des rect pour pouvoir y comparer les suivants
+            {//si une postionTrouve vaut vrai, on l'ajoute à la liste des rect pour pouvoir y comparer les suivants
                 listeRect.Add(rect);
                 listeZone.Add(new Vector3(rect.xMin, 0, rect.yMin));
             }
@@ -98,7 +86,7 @@ public class StrategieRandom : StrategieArbre
     }
 
 
-  
-    
 
-}  
+
+
+}

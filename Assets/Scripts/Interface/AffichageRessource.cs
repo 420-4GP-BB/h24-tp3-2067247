@@ -14,6 +14,7 @@ public class AffichageRessource : MonoBehaviour
     [SerializeField] private TMP_Text textViande;
     [SerializeField] private TMP_Text textChoux;
     [SerializeField] private TMP_Text textGraines;
+    //ajout du TMP pour les buches
     [SerializeField] private TMP_Text textBuches;
 
     private Color couleurParDefautEnergie;
@@ -35,6 +36,7 @@ public class AffichageRessource : MonoBehaviour
         textViande.text = ressourcesJoueurs.Oeuf.ToString();
         textChoux.text = ressourcesJoueurs.Choux.ToString();
         textGraines.text = ressourcesJoueurs.Graines.ToString();
+        //mise à jour du nombre de buches
         textBuches.text = ressourcesJoueurs.Buches.ToString();
         _energieJoueurTexte.text = Mathf.RoundToInt(energieJoueur.Energie * 100) + "%";
 

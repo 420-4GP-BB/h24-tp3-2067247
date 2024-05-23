@@ -6,6 +6,7 @@ public class ParametresParties
     public int OrDepart { get; set; } = 200;
     public int OeufsDepart { get; set; } = 5;
     public int SemencesDepart { get; set; } = 5;
+    // ajout des paramètres pour les personnages et le type de foret
     public bool fermier { get; set; } = true;
     public string typeForet { get; set; } = "Grille";
 
