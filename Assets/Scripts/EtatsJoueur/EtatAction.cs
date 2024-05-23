@@ -38,13 +38,13 @@ public class EtatAction : EtatJoueur
     /// </summary>
     /// <param name="rotationCible">la direction  de l'objet actionnable</param>
     /// <param name="dureeRotation">la durée de la rotation 0.25 secondes</param>
-    /// <returns>la coroutine qui permet une roation graduelle</returns>
+    /// <returns>la coroutine qui permet une rotation graduelle</returns>
     private IEnumerator RotationGraduelle(Quaternion rotationCible, float dureeRotation)
     {//on prend garde en mémoire la roation initiale pour la réutiliser dans le slerp
         Quaternion rotationInitiale = Sujet.transform.rotation;
-        //variable pour stocker le temps
+        //variable pour stocker le temps écoulé pour la boucle du slerp
         float tempsEcoule = 0f;
-        //boucle pour la roation graduelle
+        //boucle pour la rotation graduelle
         while (tempsEcoule < dureeRotation)
         {
             tempsEcoule += Time.deltaTime;
